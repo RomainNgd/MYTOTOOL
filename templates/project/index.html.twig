@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des projet{% endblock %}
+
+{% block body %}
+    <h2 class="mb-3">{{ title }}</h2>
+    <div class="text-center mt-3">
+        <a class="btn btn-primary text-center" href="{{ path('app_project_create') }}"><i class="fa-solid fa-plus me-3"> </i>Nouveau projet</a>
+    </div>
+    {% if projects %}
+        <div class="d-flex flex-wrap">
+            {% for project in projects %}
+                <div class="shadow p-3 mb-5 bg-body-tertiary rounded m-3">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="small d-inline-block mb-2 text-primary-emphasis">{{ project.owner.email }}</strong>
+                        <h3 class="mb-0">{{ project.name }}</h3>
+                        <p class="card-text mb-auto">{{ project.description }}</p>
+                        <a class="btn btn-primary btn-sm mt-2" href="{{ path('app_project_one', {'project' : project.id}) }}">
+                            Voir le projet
+                        </a>
+                        <a class="btn btn-success btn-sm mt-2" href="{{ path('app_project_edit', {'project' : project.id}) }}">
+                            Modifié
+                        </a>
+                        <a class="btn btn-danger btn-sm mt-2" href="{{ path('app_project_delete', {'project' : project.id}) }}">
+                            Supprimer
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    {% endif %}
+{% endblock %}

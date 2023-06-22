@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - MYTOTOOL{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">{{ title }}</h1>
+    <div class="text-center mt-3">
+        <a class="btn btn-primary text-center" href="{{ path('app_project_create') }}"><i class="fa-solid fa-plus me-3"> </i>Nouveau projet</a>
+    </div>
+    <div>
+        <div class=" gap-4 py-md-5 align-items-center d-flex flex-column animate__animated animate__animated" id="main-div">
+            <div class="list-group w-75">
+                <a href="#" class="list-group-item list-group-item-action gap-3 py-3 text-center" aria-current="true">
+                    <h4>Liste des projets</h4>
+                </a>
+                {% if projects %}
+                    {% for project in projects %}
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-around gap-3 py-3 w-100" aria-current="true">
+                            <div class="d-flex gap-2 w-100 justify-content-between">
+                                <p class="pb-3 mb-0 small lh-sm col-6">
+                                    <strong class="d-block text-gray-dark">{{ project.name }}</strong>
+                                    {{ project.description }}
+                                </p>
+                                <a class="btn btn-primary" href="{{ path('app_project_one', {'project': project.id}) }}">Voir le projet</a>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class=" w-100 my-4 text-center">
+                        <strong class="d-block text-gray-dark">Vous n'avez aucun projet</strong>
+                    </div>
+                {% endif %}
+
+                <a href="#" class="list-group-item list-group-item-action gap-3 py-3 text-center" aria-current="true">
+                    <button class="btn btn-primary">Voir toutes les projet</button>
+                </a>
+            </div>
+            <div class="list-group w-75">
+                <a href="#" class="list-group-item list-group-item-action gap-3 py-3 text-center" aria-current="true">
+                    <h4>Liste des tâches</h4>
+                </a>
+                {% if tasks %}
+                    {% for task in tasks %}
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-around gap-3 py-3 w-100" aria-current="true">
+                            {% if task.priority is same as 1 %}
+                                <div class="me-3 col">
+                                    <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Faible</span>
+                                </div>
+                            {% elseif task.priority is same as 2 %}
+                                <div class="me-3 col">
+                                    <span class="badge bg-info-subtle text-info-emphasis rounded-pill">moyenne</span>
+                                </div>
+                            {% elseif task.priority is same as 3 %}
+                                <div class="me-3 col">
+                                    <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">haute</span>
+                                </div>
+                            {% elseif task.priority is same as 4 %}
+                                <div class="me-3 col">
+                                    <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Urgente</span>
+                                </div>
+                            {% endif %}
+                            <div class="d-flex gap-2 w-100 justify-content-between">
+                                <p class="pb-3 mb-0 small lh-sm col-6">
+                                    <strong class="d-block text-gray-dark">{{ task.name }}</strong>
+                                    {{ task.note }}
+                                </p>
+                                <small class="d-none d-xs-block opacity-50 text-nowrap">{{ task.deadline|date('d-m-Y') }}</small>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class=" w-100 my-4 text-center">
+                            <strong class="d-block text-gray-dark">Vous n'avez aucune tâche</strong>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

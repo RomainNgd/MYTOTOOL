@@ -1,0 +1,35 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white text-bg-dark animate__animated animate__slideInLeft" id="sidenav" style="width: 250px;">
+    <div class="position-absolute top-0 end-0 p-4" id="toggle-button">
+        <i onclick="toggleNav()" class="fa-solid fa-bars fa-lg" style="color: #ffffff"></i>
+    </div>
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <img class="" src="{{ asset('./assets/img/MYTOTOOL.png') }}" alt="" width="100" >
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item mb-3">
+            <a href="{{ path('app_homepage') }}" class="nav-link active" aria-current="page">
+                <i class="fa-solid fa-house m-2"></i>
+                Accueil
+            </a>
+        </li>
+        <li class="mb-3">
+            <a href="{{ path('app_project_list') }}" class="nav-link text-white">
+                <i class="fa-sharp fa-solid fa-list-check m-2"></i>
+                Projet
+            </a>
+        </li>
+        <li class="mb-3">
+            <a href="{{ path('app_project_create') }}" class="nav-link text-white">
+                <i class="fa-solid fa-user-group m-2"></i>
+                Créer un projet
+            </a>
+        </li>
+    </ul>
+    <hr>
+    <div class="user text-center">
+        <p> <strong> {{ app.user.email }}</strong></p>
+        <a class="btn btn-primary" href="{{ path('app_profil') }}">Profil</a>
+        <a class="btn btn-primary" href="{{ path('app_logout') }}">Deconnexion</a>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+body{
+    font-family: Comfortaa, Arial, sans-serif;
+    height: 100vh;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar-nav .nav-link.active{
+    background-color: #0a53be;
+    color: white;
+    border-radius: 12px;
+}
+
+#sidenav{
+    height: 100vh;
+}
+#toggle{
+    height: 100vh;
+    cursor: pointer;
+}
+#toggle-button{
+    cursor: pointer;
+}
+
+main{
+    padding: 3em;
+}
+
+@media screen and (max-width: 400px ) {
+    main{
+        padding: 0.5em;
+    }
+}

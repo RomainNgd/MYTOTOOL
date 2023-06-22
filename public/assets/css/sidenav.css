@@ -1,0 +1,9 @@
+#sidenav{
+    z-index: 200;
+}
+@media screen and (max-width: 900px) {
+    #sidenav{
+        position: fixed;
+        z-index: 200;
+    }
+}

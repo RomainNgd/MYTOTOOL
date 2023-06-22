@@ -1,0 +1,9 @@
+.cursor{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+    .small-hidden{
+        display: none;
+    }
+}

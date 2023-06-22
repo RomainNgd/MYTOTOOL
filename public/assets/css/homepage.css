@@ -1,0 +1,13 @@
+#main-div{
+    padding: 4em;
+}
+
+@media screen and (max-width: 400px) {
+    #main-div{
+        padding: 0em;
+    }
+
+    .phone-none{
+        display: none;
+    }
+}

@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('./assets/css/task.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %}Hello TaskController!{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mb-5">{{title}}</h1>
+    <div class="text-center my-3">
+        <a class="btn btn-primary text-center" href="{{ path('app_task_create', {'project' : id}) }}"><i class="fa-solid fa-plus me-3"> </i>Nouvelle tâches</a>
+    </div>
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h5>Liste des tâche a faire</h5>
+        <div class="d-flex text-body-secondary pt-3 align-items-center border-bottom pb-2">
+            <div class=" me-3 col fs-6">
+                Prorité
+            </div>
+            <div class="col-6 fs-6">
+                Tache :
+            </div>
+            <div class="col fs-6 small-hidden">
+                deadline :
+            </div>
+            <div class="col fs-6">
+               Action :
+            </div>
+        </div>
+        {% if todo %}
+            {% for task in todo %}
+                <div class=" text-body-secondary pt-3 border-bottom row align-items-center">
+                    {% if task.priority is same as 1 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Faible</span>
+                        </div>
+                    {% elseif task.priority is same as 2 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-info-subtle text-info-emphasis rounded-pill">moyenne</span>
+                        </div>
+                    {% elseif task.priority is same as 3 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">haute</span>
+                        </div>
+                    {% elseif task.priority is same as 4 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Urgente</span>
+                        </div>
+                    {% endif %}
+
+                    <p class="pb-3 mb-0 small lh-sm col-sm-6 col">
+                        <strong class="d-block text-gray-dark">{{ task.name }}</strong>
+                        <span class="small-hidden">{{ task.note }}</span>
+                    </p>
+                    <p class="pb-3 mb-0 small lh-sm col small-hidden">
+                        <strong class="d-block text-gray-dark">{{ task.deadline|date('d-m-y') }}</strong>
+                    </p>
+                    <p class="pb-3 mb-0 small lh-sm col small-hidden">
+                        <a class="btn btn-primary btn-sm" href="{{ path('app_task_status', {'task' : task.id})}}">Tache finit</a>
+                    </p>
+                    <div class="dropdown ms-3 col">
+                        <i class="fa-solid fa-ellipsis-vertical cursor p-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_task_status', {'task' : task.id})}}">Tache finit</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_task_edit', {'task' : task.id}) }}">Modifier</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_task_delete', {'task' : task.id}) }}">Supprimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="w-100">
+                <h4 class="mb-3">Aucune tâche â faire</h4>
+            </div>
+        {% endif %}
+    </div>
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h5>Liste des tâche réalisé</h5>
+        <div class="d-flex text-body-secondary pt-3 align-items-center border-bottom pb-2 mb-4">
+            <div class=" me-3 col fs-6">
+                Prorité
+            </div>
+            <div class="col-6 fs-6">
+                Tache :
+            </div>
+            <div class="col fs-6 small-hidden">
+                finit le :
+            </div>
+            <div class="col fs-6">
+                Action :
+            </div>
+        </div>
+        {% if doing %}
+            {% for task in doing %}
+                <div class=" text-body-secondary pt-3 border-bottom row align-items-center">
+                    {% if task.priority is same as 1 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Faible</span>
+                        </div>
+                    {% elseif task.priority is same as 2 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-info-subtle text-info-emphasis rounded-pill">moyenne</span>
+                        </div>
+                    {% elseif task.priority is same as 3 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">haute</span>
+                        </div>
+                    {% elseif task.priority is same as 4 %}
+                        <div class="me-3 col">
+                            <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Urgente</span>
+                        </div>
+                    {% endif %}
+
+                    <p class="pb-3 mb-0 small lh-sm col-6">
+                        <strong class="d-block text-gray-dark">{{ task.name }}</strong>
+                        <span class="small-hidden">{{ task.note }}</span>
+                    </p>
+                    <p class="pb-3 mb-0 small lh-sm col small-hidden">
+                        <strong class="d-block text-gray-dark">{{ task.finishAt|date('d-m-y') }}</strong>
+                    </p>
+                    <p class="pb-3 mb-0 small lh-sm col small-hidden">
+                        <a class="btn btn-primary btn-sm" href="{{ path('app_task_status', {'task' : task.id})}}"> A refaire</a>
+                    </p>
+                    <div class="dropdown ms-3 col">
+                        <i class="fa-solid fa-ellipsis-vertical cursor p-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_task_status', {'task' : task.id})}}"> A refaire</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_task_edit', {'task' : task.id}) }}">Modifier</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_task_delete', {'task' : task.id}) }}">Supprimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="w-100">
+                <h4>Aucune tâche réalisé</h4>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
