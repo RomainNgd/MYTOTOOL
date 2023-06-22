@@ -8,7 +8,8 @@ Assurez vous que vous puissez installer un projet symfony : https://symfony.com/
 
 1 - Récupérer le depo git  
 2 - Configurer les varaible d'environnement  
-3 - Executer les commande :  - composer install  
+3 - Executer les commande :  
+- composer install  
                              - php bin/console make:migration  
                              - php bin/console doctrine:migration:migrate  
 
